@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ajude Ana Laura</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Ajude a Ana Laura</h1>
+    <p>Doe com amor e transforme uma vida 💖</p>
+  </header>
+
+  <section class="doacoes">
+    <h2>Escolha o valor da sua doação</h2>
+    <div class="botoes">
+      <button onclick="gerarPix(20)">R$20</button>
+      <button onclick="gerarPix(50)">R$50</button>
+      <button onclick="gerarPix(100)">R$100</button>
+    </div>
+  </section>
+
+  <section id="pixModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharPopup()">&times;</span>
+      <h3>Doe via Pix</h3>
+      <div class="modal-body">
+        <img id="qrCode" src="" alt="QR Code Pix" />
+        <textarea id="pixCode" readonly></textarea>
+        <button onclick="copiarPix()">Copiar Código Pix</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
