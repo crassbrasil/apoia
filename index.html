@@ -1,75 +1,102 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consulta Encontrada</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Consulta de Pedido</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
       padding: 2rem;
-      background-color: #f7f7f7;
+      background: #f5f5f5;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       min-height: 100vh;
-      text-align: center;
     }
 
     .container {
       background: white;
       padding: 2rem;
       border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      max-width: 500px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
       width: 90%;
+      text-align: center;
     }
 
-    h1 {
-      color: #2c3e50;
-    }
-
-    .cpf {
-      font-size: 1.3rem;
-      color: #16a085;
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
       margin-top: 1rem;
-      word-break: break-word;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
 
-    @media (max-width: 600px) {
-      .container {
-        padding: 1.5rem;
-      }
+    button {
+      margin-top: 1rem;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #16a085;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-      h1 {
-        font-size: 1.5rem;
-      }
+    .error {
+      color: red;
+      margin-top: 1rem;
+    }
 
-      .cpf {
-        font-size: 1.1rem;
+    @media (max-width: 500px) {
+      input[type="text"], button {
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Consulta encontrada com sucesso!</h1>
-    <p>O CPF consultado foi:</p>
-    <p class="cpf" id="cpf-recebido">Carregando...</p>
+    <h2>Consultar Pedido pelo CPF</h2>
+    <input type="text" id="cpf" placeholder="Digite seu CPF (apenas números)" />
+    <button onclick="consultarCPF()">Buscar Pedido</button>
+    <div class="error" id="mensagemErro"></div>
   </div>
 
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const cpf = urlParams.get('cpf');
-    const cpfElement = document.getElementById('cpf-recebido');
+    const cpfsValidos = [
+      "12345678901",
+      "11122233344",
+      "99988877766",
+      "00011122233",
+      "45678912300",
+      "32165498700",
+      "74185296300",
+      "15935725800",
+      "25836914700",
+      "36925814700",
+      "55566677788",
+      "88877766655",
+      "14725836900",
+      "96385274100",
+      "10101010101",
+      "20202020202",
+      "30303030303",
+      "40404040404",
+      "50505050505",
+      "60606060606"
+    ];
 
-    if (cpf) {
-      cpfElement.textContent = cpf;
-    } else {
-      cpfElement.textContent = "CPF não encontrado na URL.";
+    function consultarCPF() {
+      const cpfDigitado = document.getElementById("cpf").value.trim();
+      const erro = document.getElementById("mensagemErro");
+
+      if (cpfsValidos.includes(cpfDigitado)) {
+        window.location.href = `apoio/index.html?cpf=${encodeURIComponent(cpfDigitado)}`;
+      } else {
+        erro.textContent = "❌ Pedido não encontrado.";
+      }
     }
-  </script>
-</body>
-</html>
+  </
