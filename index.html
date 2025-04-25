@@ -3,107 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consulta de Pedido</title>
+  <title>Consulta Encontrada</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
+      padding: 2rem;
+      background-color: #f7f7f7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
     }
+
     .container {
-      background-color: white;
-      padding: 30px;
+      background: white;
+      padding: 2rem;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      max-width: 500px;
       width: 90%;
-      box-sizing: border-box;
     }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
+
+    h1 {
+      color: #2c3e50;
     }
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
+
+    .cpf {
+      font-size: 1.3rem;
+      color: #16a085;
+      margin-top: 1rem;
+      word-break: break-word;
     }
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    #mensagem {
-      margin-top: 15px;
-      text-align: center;
-      color: red;
-      font-weight: bold;
-    }
-    @media (max-width: 480px) {
+
+    @media (max-width: 600px) {
       .container {
-        padding: 20px;
+        padding: 1.5rem;
       }
-      h2 {
-        font-size: 1.2rem;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .cpf {
+        font-size: 1.1rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Consulte seu pedido</h2>
-    <input type="text" id="cpf" placeholder="Digite seu CPF (somente números)">
-    <button onclick="consultarPedido()">Consultar</button>
-    <div id="mensagem"></div>
+    <h1>Consulta encontrada com sucesso!</h1>
+    <p>O CPF consultado foi:</p>
+    <p class="cpf" id="cpf-recebido">Carregando...</p>
   </div>
 
   <script>
-    const cpfsValidos = [
-      "12345678900",
-      "11122233344",
-      "98765432100",
-      "55566677788",
-      "00011122233",
-      "44455566677",
-      "88899900011",
-      "22233344455",
-      "33344455566",
-      "66677788899",
-      "10101010101",
-      "20202020202",
-      "30303030303",
-      "40404040404",
-      "50505050505",
-      "60606060606",
-      "70707070707",
-      "80808080808",
-      "90909090909",
-      "12121212121"
-    ];
+    const urlParams = new URLSearchParams(window.location.search);
+    const cpf = urlParams.get('cpf');
+    const cpfElement = document.getElementById('cpf-recebido');
 
-    function consultarPedido() {
-      const cpf = document.getElementById('cpf').value.trim();
-      const mensagem = document.getElementById('mensagem');
-
-      if (cpfsValidos.includes(cpf)) {
-        window.location.href = 'https://crassbrasil.github.io/apoio/';
-      } else {
-        mensagem.textContent = 'Pedido não encontrado.';
-      }
+    if (cpf) {
+      cpfElement.textContent = cpf;
+    } else {
+      cpfElement.textContent = "CPF não encontrado na URL.";
     }
   </script>
 </body>
